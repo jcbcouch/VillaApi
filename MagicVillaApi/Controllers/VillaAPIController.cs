@@ -1,4 +1,5 @@
-﻿using MagicVillaApi.Models;
+﻿using MagicVillaApi.Data;
+using MagicVillaApi.Models;
 using MagicVillaApi.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,10 +13,13 @@ namespace MagicVillaApi.Controllers
         [HttpGet]
         public IEnumerable<VillaDTO> GetVillas()
         {
-            return new List<VillaDTO> {
-            new VillaDTO{Id=1,Name="Pool View" },
-            new VillaDTO{Id=2,Name="Beach View" }
-            };
+            return VillaStore.villaList;
+        }
+
+        [HttpGet("{id:int}")]
+        public VillaDTO GetVilla(int id)
+        {
+            return VillaStore.villaList.FirstOrDefault(u => u.Id == id);
         }
     }
 }
