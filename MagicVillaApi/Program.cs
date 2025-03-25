@@ -1,3 +1,4 @@
+using MagicVillaApi;
 using MagicVillaApi.Data;
 using MagicVillaApi.Logging;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 builder.Services.AddControllers(option => {
     //option.ReturnHttpNotAcceptable = true;
