@@ -2,6 +2,7 @@
 using MagicVillaWeb.Models;
 using MagicVillaWeb.Models.Dto;
 using MagicVillaWeb.Services.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -28,12 +29,12 @@ namespace MagicVillaWeb.Controllers
             }
             return View(list);
         }
-
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> CreateVilla()
         {
             return View();
         }
-
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateVilla(VillaCreateDTO model)
@@ -51,7 +52,7 @@ namespace MagicVillaWeb.Controllers
             TempData["error"] = "Error encountered.";
             return View(model);
         }
-
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> UpdateVilla(int villaId)
         {
             var response = await _villaService.GetAsync<APIResponse>(villaId);
@@ -63,7 +64,7 @@ namespace MagicVillaWeb.Controllers
             }
             return NotFound();
         }
-
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateVilla(VillaUpdateDTO model)
@@ -80,7 +81,7 @@ namespace MagicVillaWeb.Controllers
             TempData["error"] = "Error encountered.";
             return View(model);
         }
-
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteVilla(int villaId)
         {
             var response = await _villaService.GetAsync<APIResponse>(villaId);
@@ -91,7 +92,7 @@ namespace MagicVillaWeb.Controllers
             }
             return NotFound();
         }
-
+        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteVilla(VillaDTO model)
