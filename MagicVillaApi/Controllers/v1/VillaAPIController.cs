@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace MagicVillaApi.Controllers
+namespace MagicVillaApi.Controllers.v1
 {
     //[Route("api/[controller]")]
     [Route("api/v{version:apiVersion}/VillaAPI")]
@@ -25,7 +25,7 @@ namespace MagicVillaApi.Controllers
         {
             _dbVilla = dbVilla;
             _mapper = mapper;
-            this._response = new();
+            _response = new();
         }
 
 

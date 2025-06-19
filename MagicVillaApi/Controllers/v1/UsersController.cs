@@ -4,7 +4,7 @@ using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using MagicVillaApi.Models;
 
-namespace MagicVillaApi.Controllers
+namespace MagicVillaApi.Controllers.v1
 {
     [Route("api/v{version:apiVersion}/UsersAuth")]
     [ApiController]
@@ -16,7 +16,7 @@ namespace MagicVillaApi.Controllers
         public UsersController(IUserRepository userRepo)
         {
             _userRepo = userRepo;
-            this._response = new();
+            _response = new();
         }
 
         [HttpPost("login")]
