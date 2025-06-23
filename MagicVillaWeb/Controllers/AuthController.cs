@@ -7,6 +7,7 @@ using MagicVillaWeb.Services.IServices;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 
 namespace MagicVillaWeb.Controllers
@@ -39,7 +40,7 @@ namespace MagicVillaWeb.Controllers
                 var jwt = handler.ReadJwtToken(model.Token);
 
                 var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-                identity.AddClaim(new Claim(ClaimTypes.Name, jwt.Claims.FirstOrDefault(u => u.Type == "unique_name").Value));
+                identity.AddClaim(new Claim(ClaimTypes.Name, jwt.Claims.FirstOrDefault(u => u.Type == "name").Value));
                 identity.AddClaim(new Claim(ClaimTypes.Role, jwt.Claims.FirstOrDefault(u => u.Type == "role").Value));
                 var principal = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
@@ -58,6 +59,12 @@ namespace MagicVillaWeb.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            var roleList = new List<SelectListItem>()
+            {
+                  new SelectListItem{Text=SD.Admin,Value=SD.Admin},
+                new SelectListItem{Text=SD.Customer,Value=SD.Customer},
+            };
+            ViewBag.RoleList = roleList;
             return View();
         }
 
