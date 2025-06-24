@@ -17,4 +17,9 @@
     <ProjectReference Include="..\MagicVillaUtility\MagicVillaUtility.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\home\" />
+    <Folder Include="wwwroot\images\villa\" />
+  </ItemGroup>
+
 </Project>
