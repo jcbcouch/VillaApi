@@ -46,7 +46,7 @@ namespace MagicVillaWeb.Controllers
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
 
-                HttpContext.Session.SetString(SD.SessionToken, model.Token);
+                HttpContext.Session.SetString(SD.AccessToken, model.Token);
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -95,7 +95,7 @@ namespace MagicVillaWeb.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();
-            HttpContext.Session.SetString(SD.SessionToken, "");
+            HttpContext.Session.SetString(SD.AccessToken, "");
             return RedirectToAction("Index", "Home");
         }
 
